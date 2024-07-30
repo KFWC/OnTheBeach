@@ -39,7 +39,7 @@ namespace OnTheBeach
             Hotel? hotel = hotels.FirstOrDefault();
             if (hotel != null)
             {
-                totalPrice += hotel.Price;
+                totalPrice += ((uint)(hotel.Price * hotel.Nights));
             }
 
             Holiday holiday = new()

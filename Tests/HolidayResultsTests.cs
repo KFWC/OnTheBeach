@@ -51,7 +51,7 @@ namespace OnTheBeach.Tests
             Assert.That(holiday.Flight.Id, Is.EqualTo(2));
             Assert.That(holiday.Hotel, Is.Not.Null);
             Assert.That(holiday.Hotel.Id, Is.EqualTo(9));
-            Assert.That(holiday.Price, Is.EqualTo(328));
+            Assert.That(holiday.Price, Is.EqualTo(826));
         }
 
         [Test]
@@ -66,9 +66,9 @@ namespace OnTheBeach.Tests
             Assert.That(holiday.Flight.Id, Is.EqualTo(6));
             Assert.That(holiday.Hotel, Is.Not.Null);
             Assert.That(holiday.Hotel.Id, Is.EqualTo(5));
-            Assert.That(holiday.Price, Is.EqualTo(135));
-
+            Assert.That(holiday.Price, Is.EqualTo(675));
         }
+
         [Test]
         public void CustomerThree_ShouldReturnFlightSevenAndHotelSix()
         {
@@ -81,8 +81,7 @@ namespace OnTheBeach.Tests
             Assert.That(holiday.Flight.Id, Is.EqualTo(7));
             Assert.That(holiday.Hotel, Is.Not.Null);
             Assert.That(holiday.Hotel.Id, Is.EqualTo(6));
-            Assert.That(holiday.Price, Is.EqualTo(200));
-
+            Assert.That(holiday.Price, Is.EqualTo(1175));
         }
     }
 }

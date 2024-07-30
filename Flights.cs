@@ -13,31 +13,19 @@ namespace OnTheBeach
             FlightList = LoadData();
         }
 
-        public List<Flight> LoadData(string jsonData)
+        public List<Flight> LoadData()
         {
-            RootFlights? data = JsonConvert.DeserializeObject<RootFlights>(jsonData);
+            using StreamReader reader = new StreamReader("../../../Data/Flights.json");
+
+            string json = reader.ReadToEnd();
+
+            RootFlights? data = JsonConvert.DeserializeObject<RootFlights>(json);
 
             if (data != null)
             {
-                FlightList = data.flights;
+                FlightList = data.Flights;
             }
             return FlightList;
-        }
-
-        public List<Flight> LoadData()
-        {
-            using (StreamReader reader = new StreamReader("../../../Data/Flights.json"))
-            {
-                string json = reader.ReadToEnd();
-
-                RootFlights? data  = JsonConvert.DeserializeObject<RootFlights>(json);
-
-                if (data != null)
-                {
-                    FlightList = data.flights;
-                }
-                return FlightList;
-            }
         }
 
         public List<Flight> Search(string[] from, string to, DateTime departureDate)
@@ -48,13 +36,13 @@ namespace OnTheBeach
 
             foreach (var flight in FlightList)
             {
-                if (from.Contains(flight.from) && flight.to == to && flight.departure_date == departure)
+                if (from.Contains(flight.From) && flight.To == to && flight.Departure_Date == departure)
                 {
                     suitableFlights.Add(flight);
                 }
             }
 
-            return suitableFlights.OrderBy(o => o.price).ToList();
+            return suitableFlights.OrderBy(o => o.Price).ToList();
         }
 
         public List<Flight> Search(string to, DateTime departureDate)
@@ -65,13 +53,13 @@ namespace OnTheBeach
 
             foreach (var flight in FlightList)
             {
-                if (flight.to == to && flight.departure_date == departure)
+                if (flight.To == to && flight.Departure_Date == departure)
                 {
                     suitableFlights.Add(flight);
                 }
             }
 
-            return suitableFlights.OrderBy(o => o.price).ToList();
+            return suitableFlights.OrderBy(o => o.Price).ToList();
         }
     }
 }

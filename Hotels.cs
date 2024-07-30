@@ -13,31 +13,19 @@ namespace OnTheBeach
             HotelList = LoadData();
         }
 
-        public List<Hotel> LoadData(string jsonData)
+        public List<Hotel> LoadData()
         {
-            RootHotels? data = JsonConvert.DeserializeObject<RootHotels>(jsonData);
+            using StreamReader reader = new StreamReader("../../../Data/Hotels.json");
+
+            string json = reader.ReadToEnd();
+
+            RootHotels? data = JsonConvert.DeserializeObject<RootHotels>(json);
 
             if (data != null)
             {
-                HotelList = data.hotels;
+                HotelList = data.Hotels;
             }
             return HotelList;
-        }
-
-        public List<Hotel> LoadData()
-        {
-            using (StreamReader reader = new StreamReader("../../../Data/Hotels.json"))
-            {
-                string json = reader.ReadToEnd();
-
-                RootHotels? data = JsonConvert.DeserializeObject<RootHotels>(json);
-
-                if (data != null)
-                {
-                    HotelList = data.hotels;
-                }
-                return HotelList;
-            }
         }
 
         public List<Hotel> Search(string airport, DateTime arrivalDate, int duration)
@@ -48,13 +36,13 @@ namespace OnTheBeach
 
             foreach (var hotel in HotelList)
             {
-                if (hotel.local_airports.Contains(airport) && hotel.arrival_date == arrival && hotel.nights == duration)
+                if (hotel.Local_Airports.Contains(airport) && hotel.Arrival_Date == arrival && hotel.Nights == duration)
                 {
                     suitableHotels.Add(hotel);
                 }
             }
 
-            return suitableHotels.OrderBy(o => o.price).ToList();
+            return suitableHotels.OrderBy(o => o.Price).ToList();
         }
     }
 }
